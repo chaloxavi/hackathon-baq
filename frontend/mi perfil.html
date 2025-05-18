@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="styles.css" rel="stylesheet">
+    <title>Panel Donaciones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gray-100 p-6 text-gray-800">
+    <div id="navbar-container"></div>
+
+    <h1 class="text-3xl font-bold mb-8">Panel de Control · Banco de Alimentos</h1>
+
+    <!-- Métricas -->
+    <div class="grid md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white p-5 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-2">Total Recaudado</h2>
+            <p class="text-3xl text-green-600 font-bold">€6,200</p>
+        </div>
+        <div class="bg-white p-5 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-2">Número de Donantes</h2>
+            <p class="text-3xl text-blue-600 font-bold">128</p>
+        </div>
+        <div class="bg-white p-5 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-2">Ticket Promedio</h2>
+            <p class="text-3xl text-purple-600 font-bold">€48.43</p>
+        </div>
+    </div>
+
+    <!-- Gráfico mensual y Top donantes en una sola línea -->
+    <div class="grid md:grid-cols-3 gap-6 mb-10">
+        <!-- Gráfico mensual -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-4">Donaciones Mensuales (€)</h2>
+            <canvas id="donacionesChart" height="120"></canvas>
+        </div>
+
+        <!-- Top donantes -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-4">Top Donantes</h2>
+            <ul class="divide-y">
+                <li class="flex justify-between py-3"><span>Ana Pérez</span><span
+                        class="text-green-600 font-bold">€1,000</span></li>
+                <li class="flex justify-between py-3"><span>Luis Gómez</span><span
+                        class="text-green-600 font-bold">€850</span></li>
+                <li class="flex justify-between py-3"><span>Claudia Ruiz</span><span
+                        class="text-green-600 font-bold">€780</span></li>
+            </ul>
+        </div>
+
+        <!-- Donaciones por país y ciudad -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-4">Donaciones por País y Ciudad</h2>
+            <div>
+                <h3 class="text-lg font-semibold mb-2">Por País</h3>
+                <ul class="divide-y">
+                    <li class="flex justify-between py-2"><span>España</span><span
+                            class="text-green-600 font-bold">€3,500</span></li>
+                    <li class="flex justify-between py-2"><span>Colombia</span><span
+                            class="text-green-600 font-bold">€2,200</span></li>
+                    <li class="flex justify-between py-2"><span>Ecuador</span><span
+                            class="text-green-600 font-bold">€1,500</span></li>
+                </ul>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-semibold mb-2">Por Ciudad</h3>
+                <ul class="divide-y">
+                    <li class="flex justify-between py-2"><span>Madrid</span><span
+                            class="text-green-600 font-bold">€2,000</span></li>
+                    <li class="flex justify-between py-2"><span>Bogotá</span><span
+                            class="text-green-600 font-bold">€1,800</span></li>
+                    <li class="flex justify-between py-2"><span>Quito</span><span
+                            class="text-green-600 font-bold">€1,200</span></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!-- Tabla de registros de donantes con filtros y botón de descarga -->
+    <div class="bg-white p-6 rounded-lg shadow mt-10">
+        <h2 class="text-xl font-semibold mb-4">Registros de Donaciones</h2>
+
+        <!-- Filtros -->
+        <div class="flex flex-wrap items-center gap-4 mb-4">
+            <label for="startDate" class="text-sm font-medium">Fecha de inicio:</label>
+            <input type="date" id="startDate" class="border rounded-md px-4 py-2 text-sm text-gray-700">
+
+            <label for="endDate" class="text-sm font-medium">Fecha de fin:</label>
+            <input type="date" id="endDate" class="border rounded-md px-4 py-2 text-sm text-gray-700">
+
+            <select id="quickFilter" class="border rounded-md px-4 py-2 text-sm text-gray-700">
+                <option value="thisMonth" selected>Este mes</option>
+                <option value="lastMonth">Mes anterior</option>
+                <option value="yearToDate">Lo que va del año</option>
+                <option value="last30Days">Últimos 30 días</option>
+                <option value="last60Days">Últimos 60 días</option>
+                <option value="last90Days">Últimos 90 días</option>
+            </select>
+
+            <button id="applyFilters" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700">
+                Aplicar filtros
+            </button>
+
+            <button id="downloadExcel" class="bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:bg-green-700">
+                Descargar Excel
+            </button>
+        </div>
+
+        <!-- Tabla -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full border-collapse border border-gray-200">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-4 py-2 text-left">Nombre</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Monto (€)</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Fecha</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Pais</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Ana Pérez</td>
+                        <td class="border border-gray-300 px-4 py-2">ana.perez@example.com</td>
+                        <td class="border border-gray-300 px-4 py-2 text-green-600 font-bold">€1,000</td>
+                        <td class="border border-gray-300 px-4 py-2">2025-05-15</td>
+                        <td class="border border-gray-300 px-4 py-2">España</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="border border-gray-300 px-4 py-2">Luis Gómez</td>
+                        <td class="border border-gray-300 px-4 py-2">luis.gomez@example.com</td>
+                        <td class="border border-gray-300 px-4 py-2 text-green-600 font-bold">€850</td>
+                        <td class="border border-gray-300 px-4 py-2">2025-05-14</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Claudia Ruiz</td>
+                        <td class="border border-gray-300 px-4 py-2">claudia.ruiz@example.com</td>
+                        <td class="border border-gray-300 px-4 py-2 text-green-600 font-bold">€780</td>
+                        <td class="border border-gray-300 px-4 py-2">2025-05-13</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="border border-gray-300 px-4 py-2">Carlos López</td>
+                        <td class="border border-gray-300 px-4 py-2">carlos.lopez@example.com</td>
+                        <td class="border border-gray-300 px-4 py-2 text-green-600 font-bold">€500</td>
+                        <td class="border border-gray-300 px-4 py-2">2025-05-12</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Script para filtros y descarga -->
+    <script>
+        document.getElementById('downloadExcel').addEventListener('click', () => {
+            alert('Función de descarga en Excel aún no implementada.');
+            // Aquí puedes usar una biblioteca como SheetJS (xlsx) para generar y descargar el archivo Excel.
+        });
+
+        document.getElementById('applyFilters').addEventListener('click', () => {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const quickFilter = document.getElementById('quickFilter').value;
+
+            alert(`Filtros aplicados:\nFecha de inicio: ${startDate}\nFecha de fin: ${endDate}\nFiltro rápido: ${quickFilter}`);
+            // Aquí puedes implementar la lógica para filtrar los datos de la tabla.
+        });
+    </script>
+
+    <!-- Tabla de donantes con contrato de débito bancario -->
+    <div class="bg-white p-6 rounded-lg shadow mt-10">
+        <h2 class="text-xl font-semibold mb-4">Donantes con Contrato de Débito Bancario</h2>
+
+        <!-- Filtros -->
+        <div class="flex flex-wrap items-center gap-4 mb-4">
+            <label for="startDateDebit" class="text-sm font-medium">Fecha de inicio:</label>
+            <input type="date" id="startDateDebit" class="border rounded-md px-4 py-2 text-sm text-gray-700">
+
+            <label for="endDateDebit" class="text-sm font-medium">Fecha de fin:</label>
+            <input type="date" id="endDateDebit" class="border rounded-md px-4 py-2 text-sm text-gray-700">
+
+            <select id="quickFilterDebit" class="border rounded-md px-4 py-2 text-sm text-gray-700">
+                <option value="thisMonth" selected>Este mes</option>
+                <option value="lastMonth">Mes anterior</option>
+                <option value="yearToDate">Lo que va del año</option>
+                <option value="last30Days">Últimos 30 días</option>
+                <option value="last60Days">Últimos 60 días</option>
+                <option value="last90Days">Últimos 90 días</option>
+            </select>
+
+            <button id="applyFiltersDebit"
+                class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700">
+                Aplicar filtros
+            </button>
+
+            <button id="downloadExcelDebit"
+                class="bg-green-600 text-white px-4 py-2 rounded-md text-sm hover:bg-green-700">
+                Descargar Excel
+            </button>
+
+
+        </div>
+
+        <!-- Tabla -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full border-collapse border border-gray-200">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-4 py-2 text-left">Nombres</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Apellidos</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Cédula</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Correo Electrónico</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Monto (€)</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Banco</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Número de Cuenta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Karolina</td>
+                        <td class="border border-gray-300 px-4 py-2">Lema Almeida</td>
+                        <td class="border border-gray-300 px-4 py-2">1724820244</td>
+                        <td class="border border-gray-300 px-4 py-2">karolinalema@gmail.com</td>
+                        <td class="border border-gray-300 px-4 py-2 text-green-600 font-bold">€10</td>
+                        <td class="border border-gray-300 px-4 py-2">Pacífico</td>
+                        <td class="border border-gray-300 px-4 py-2">1044720609</td>
+                        <td class="border border-gray-300 px-4 py-2"> <button id="downloadPdfContract"
+                                class="bg-red-600 text-white px-4 py-2 rounded-md text-sm hover:bg-red-700">
+                                Descargar Respaldo
+                            </button></td>
+
+                    </tr>
+                    <!-- Agrega más filas según sea necesario -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Script para filtros, descarga de Excel y PDF -->
+    <script>
+        document.getElementById('downloadExcelDebit').addEventListener('click', () => {
+            alert('Función de descarga en Excel aún no implementada.');
+            // Aquí puedes usar una biblioteca como SheetJS (xlsx) para generar y descargar el archivo Excel.
+        });
+
+        document.getElementById('applyFiltersDebit').addEventListener('click', () => {
+            const startDate = document.getElementById('startDateDebit').value;
+            const endDate = document.getElementById('endDateDebit').value;
+            const quickFilter = document.getElementById('quickFilterDebit').value;
+
+            alert(`Filtros aplicados:\nFecha de inicio: ${startDate}\nFecha de fin: ${endDate}\nFiltro rápido: ${quickFilter}`);
+            // Aquí puedes implementar la lógica para filtrar los datos de la tabla.
+        });
+
+        document.getElementById('downloadPdfContract').addEventListener('click', () => {
+            alert('Descargando contrato en PDF...');
+            // Aquí puedes usar una biblioteca como jsPDF para generar y descargar el archivo PDF.
+            // Ejemplo con jsPDF:
+            // const doc = new jsPDF();
+            // doc.text("Contrato de Débito Bancario", 10, 10);
+            // doc.save("contrato_debito.pdf");
+        });
+    </script>
+
+    <!-- Chart.js Script -->
+    <script>
+        const ctx = document.getElementById('donacionesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr'],
+                datasets: [{
+                    label: 'Recaudado',
+                    data: [1200, 1800, 1000, 2200],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+    <script src="load-navbar.js"></script>
+
+</body>
+
+</html>

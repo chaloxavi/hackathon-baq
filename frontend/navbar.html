@@ -1,38 +1,25 @@
-<nav class="bg-white shadow-lg" x-data="{ isOpen: false, dropdownOpen: false }">
+<nav class="bg-gray-800 text-white" x-data="{ isOpen: false, dropdownOpen: false }">
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between items-center h-16">
             <!-- Logo -->
             <a href="index.html" class="flex items-center">
-                <img src="logo.png" alt="Logo" class="h-8 w-8">
-                <span class="ml-2 text-xl font-semibold">Mi Sitio</span>
+                <img src="https://www.baq.ec/wp-content/uploads/2023/07/WB_Logo_Blanco_2025_BAQ.webp" alt="Logo" class="h-10">
+                <span class="ml-2 text-xl font-semibold">BAQ</span>
             </a>
 
             <!-- Menú Desktop -->
             <div class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="nav-link">Inicio</a>
-                
-                <!-- Dropdown Donaciones -->
-                <div class="relative" @mouseenter="dropdownOpen = true" @mouseleave="dropdownOpen = false">
-                    <button class="nav-link flex items-center">
-                        Donaciones
-                        <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </button>
-                    
-                    <div x-show="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
-                        <a href="donacion_recurrente.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Débito Recurrente</a>
-                        <a href="pago_en_linea.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Pago en Línea</a>
-                    </div>
-                </div>
-                
-                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="index.html" class="nav-link block px-3 py-2">Inicio</a>
+                <a href="donacion_recurrente.html" class="nav-link block px-3 py-2">Débito Recurrente</a>
+                <a href="pago_en_linea.html" class="nav-link block px-3 py-2">Pago en Línea</a>
+
+                <a href="dashboard.html" class="nav-link block px-3 py-2">Dashboard</a>
             </div>
 
             <!-- Botón Mobile -->
             <button @click="isOpen = !isOpen" class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
         </div>
@@ -41,21 +28,13 @@
         <div class="md:hidden" x-show="isOpen" @click.away="isOpen = false">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="index.html" class="nav-link block px-3 py-2">Inicio</a>
-                
-                <div class="relative">
-                    <button @click="dropdownOpen = !dropdownOpen" class="nav-link w-full flex justify-between items-center px-3 py-2">
-                        Donaciones
-                        <svg class="h-4 w-4" :class="{ 'transform rotate-180': dropdownOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </button>
-                    
-                    <div x-show="dropdownOpen" class="pl-4">
-                        <a href="donacion_recurrente.html" class="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">Débito Recurrente</a>
-                        <a href="pago_en_linea.html" class="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">Pago en Línea</a>
-                    </div>
-                </div>
-                
+                <a href="donacion_recurrente.html" class="nav-link block px-3 py-2">Débito
+                    Recurrente</a>
+                <a href="pago_en_linea.html" class="nav-link block px-3 py-2">Pago
+                    en Línea</a>
+
+
+
                 <a href="dashboard.html" class="nav-link block px-3 py-2">Dashboard</a>
             </div>
         </div>

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitud de Pago</title>
+    <title>Debito Recurrente</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <link href="styles.css" rel="stylesheet">
     <style>
         body {
             background-image: url('https://www.baq.ec/wp-content/uploads/2025/05/wb-baq-headher-v1.webp');
@@ -14,40 +16,49 @@
             background-attachment: fixed;
             min-height: 100vh;
         }
+
         .form-container {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(5px);
         }
+
         .header-title {
             color: #1a3e72;
             border-bottom: 2px solid #e30613;
             display: inline-block;
             padding-bottom: 8px;
         }
+
         .btn-primary {
             background-color: #e30613;
             color: white;
         }
+
         .btn-primary:hover {
             background-color: #c00511;
         }
+
         .tab {
             padding: 0.75rem 1.5rem;
             cursor: pointer;
             border-bottom: 3px solid transparent;
             transition: all 0.3s ease;
         }
+
         .tab.active {
             border-bottom-color: #e30613;
             font-weight: 600;
             color: #1a3e72;
         }
+
         .tab-content {
             display: none;
         }
+
         .tab-content.active {
             display: block;
         }
+
         .modal {
             display: none;
             position: fixed;
@@ -60,6 +71,7 @@
             justify-content: center;
             align-items: center;
         }
+
         .modal-content {
             background-color: white;
             padding: 2rem;
@@ -67,6 +79,7 @@
             width: 90%;
             max-width: 500px;
         }
+
         .signature-container {
             border: 1px solid #e5e7eb;
             border-radius: 0.375rem;
@@ -76,57 +89,64 @@
         }
     </style>
 </head>
-<body class="items-center  p-4">
+
+<body class="flex flex-col min-h-screen items-center justify-center p-4 pt-24">
     <div id="navbar-container"></div>
-    <div class="max-w-2xl w-full form-container my-8 p-8 rounded-lg shadow-xl">
-        <h1 class="text-2xl font-bold mb-6 header-title">SOLICITUD DE PAGO</h1>
-        
-        <!-- Pestañas -->
-        <div class="flex border-b border-gray-200 mb-6">
-            <div class="tab active" data-tab="recurrente">Aporte Recurrente</div>
-            <div class="tab" data-tab="tarjeta">Tarjeta de Crédito</div>
-        </div>
+    <div class="max-w-2xl w-full form-container my-8 p-8 rounded-lg shadow-xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6 header-title">Débito Recurrente</h1>
+
+
 
         <!-- Formulario Aporte Recurrente -->
         <form id="formRecurrente" class="tab-content active space-y-8">
             <input type="hidden" id="signature-recurrente" name="signature">
-            
+
             <!-- Sección Datos Personales -->
             <div class="border-b border-gray-200 pb-8">
                 <h2 class="text-lg font-semibold text-gray-900 mb-4">Datos Personales</h2>
                 <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-6">
                     <div>
-                        <label for="nombres-apellidos" class="block text-sm font-medium text-gray-700">Nombres y Apellidos *</label>
-                        <input type="text" id="nombres-apellidos" name="nombres-apellidos" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        <label for="nombres-apellidos" class="block text-sm font-medium text-gray-700">Nombres y
+                            Apellidos *</label>
+                        <input type="text" id="nombres-apellidos" name="nombres-apellidos" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
                     </div>
-                    
+
                     <div>
                         <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono *</label>
-                        <input type="tel" id="telefono" name="telefono" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        <input type="tel" id="telefono" name="telefono" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Fecha de Nacimiento *</label>
                         <div class="mt-1 grid grid-cols-3 gap-3">
-                            <input type="number" placeholder="Día" min="1" max="31" required class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
-                            <input type="number" placeholder="Mes" min="1" max="12" required class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
-                            <input type="number" placeholder="Año" min="1900" max="2100" required class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                            <input type="number" placeholder="Día" min="1" max="31" required
+                                class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                            <input type="number" placeholder="Mes" min="1" max="12" required
+                                class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                            <input type="number" placeholder="Año" min="1900" max="2100" required
+                                class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
                         </div>
                     </div>
-                    
+
                     <div>
                         <label for="ubicacion" class="block text-sm font-medium text-gray-700">Ubicación *</label>
-                        <input type="text" id="ubicacion" name="ubicacion" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        <input type="text" id="ubicacion" name="ubicacion" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
                     </div>
-                    
+
                     <div>
-                        <label for="identificacion" class="block text-sm font-medium text-gray-700">Identificación C.C. *</label>
-                        <input type="text" id="identificacion" name="identificacion" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        <label for="identificacion" class="block text-sm font-medium text-gray-700">Identificación C.C.
+                            *</label>
+                        <input type="text" id="identificacion" name="identificacion" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
                     </div>
-                    
+
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico *</label>
-                        <input type="email" id="email" name="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        <input type="email" id="email" name="email" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
                     </div>
                 </div>
             </div>
@@ -137,55 +157,66 @@
                 <div class="grid grid-cols-1 gap-y-6">
                     <div>
                         <label for="tipo-banco" class="block text-sm font-medium text-gray-700">Banco *</label>
-                        <select id="tipo-banco" name="tipo-banco" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        <select id="tipo-banco" name="tipo-banco" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
                             <option value="">Seleccione su banco</option>
                             <option value="Banco Pichincha">Banco Pichincha</option>
                             <option value="Banco de Guayaquil">Banco de Guayaquil</option>
                             <option value="Produbanco">Produbanco</option>
                         </select>
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Tipo de Cuenta *</label>
                         <div class="mt-2 flex items-center space-x-4">
                             <div class="flex items-center">
-                                <input id="cuenta-corriente" name="tipo-cuenta" type="radio" value="corriente" required class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <input id="cuenta-corriente" name="tipo-cuenta" type="radio" value="corriente" required
+                                    class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <label for="cuenta-corriente" class="ml-2 block text-sm text-gray-700">Corriente</label>
                             </div>
                             <div class="flex items-center">
-                                <input id="cuenta-ahorros" name="tipo-cuenta" type="radio" value="ahorros" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <input id="cuenta-ahorros" name="tipo-cuenta" type="radio" value="ahorros"
+                                    class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <label for="cuenta-ahorros" class="ml-2 block text-sm text-gray-700">Ahorros</label>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div>
-                        <label for="numero-cuenta" class="block text-sm font-medium text-gray-700">Número de Cuenta *</label>
-                        <input type="text" id="numero-cuenta" name="numero-cuenta" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        <label for="numero-cuenta" class="block text-sm font-medium text-gray-700">Número de Cuenta
+                            *</label>
+                        <input type="text" id="numero-cuenta" name="numero-cuenta" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
                     </div>
-                    
+
                     <div>
-                        <label for="titular-cuenta" class="block text-sm font-medium text-gray-700">Titular de la Cuenta *</label>
-                        <input type="text" id="titular-cuenta" name="titular-cuenta" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        <label for="titular-cuenta" class="block text-sm font-medium text-gray-700">Titular de la Cuenta
+                            *</label>
+                        <input type="text" id="titular-cuenta" name="titular-cuenta" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Monto *</label>
                         <div class="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
                             <div class="flex items-center">
-                                <input id="monto-5" name="monto" type="radio" value="5" required class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <input id="monto-5" name="monto" type="radio" value="5" required
+                                    class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <label for="monto-5" class="ml-2 block text-sm text-gray-700">$5</label>
                             </div>
                             <div class="flex items-center">
-                                <input id="monto-10" name="monto" type="radio" value="10" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <input id="monto-10" name="monto" type="radio" value="10"
+                                    class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <label for="monto-10" class="ml-2 block text-sm text-gray-700">$10</label>
                             </div>
                             <div class="flex items-center">
-                                <input id="monto-20" name="monto" type="radio" value="20" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <input id="monto-20" name="monto" type="radio" value="20"
+                                    class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <label for="monto-20" class="ml-2 block text-sm text-gray-700">$20</label>
                             </div>
                             <div class="flex items-center">
-                                <input id="monto-30" name="monto" type="radio" value="30" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <input id="monto-30" name="monto" type="radio" value="30"
+                                    class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
                                 <label for="monto-30" class="ml-2 block text-sm text-gray-700">$30</label>
                             </div>
                         </div>
@@ -196,68 +227,13 @@
             <div class="flex justify-end space-x-4">
                 <button type="button" class="btn-cancelar">Cancelar</button>
                 <button type="button" class="btn-firmar">Firmar y Enviar</button>
+                <button type="button" onclick="cargarDatosDemo()"
+                    class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
+                    Cargar Demo
+                </button>
             </div>
         </form>
 
-        <!-- Formulario Tarjeta de Crédito -->
-        <form id="formTarjeta" class="tab-content space-y-8">
-            <input type="hidden" id="signature-tarjeta" name="signature">
-            
-            <div class="space-y-6">
-                <div>
-                    <label for="numero-tarjeta" class="block text-sm font-medium text-gray-700">Número de Tarjeta *</label>
-                    <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="1234 5678 9012 3456" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
-                </div>
-                
-                <div>
-                    <label for="nombre-tarjeta" class="block text-sm font-medium text-gray-700">Nombre en la Tarjeta *</label>
-                    <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
-                </div>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label for="fecha-expiracion" class="block text-sm font-medium text-gray-700">Expiración *</label>
-                        <input type="text" id="fecha-expiracion" name="fecha-expiracion" placeholder="MM/AA" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
-                    </div>
-                    <div>
-                        <label for="cvv" class="block text-sm font-medium text-gray-700">CVV *</label>
-                        <input type="text" id="cvv" name="cvv" placeholder="123" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
-                    </div>
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Monto *</label>
-                    <div class="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                        <div class="flex items-center">
-                            <input id="monto-t-5" name="monto" type="radio" value="5" required class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
-                            <label for="monto-t-5" class="ml-2 block text-sm text-gray-700">$5</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="monto-t-10" name="monto" type="radio" value="10" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
-                            <label for="monto-t-10" class="ml-2 block text-sm text-gray-700">$10</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="monto-t-20" name="monto" type="radio" value="20" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
-                            <label for="monto-t-20" class="ml-2 block text-sm text-gray-700">$20</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="monto-t-30" name="monto" type="radio" value="30" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
-                            <label for="monto-t-30" class="ml-2 block text-sm text-gray-700">$30</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex items-center">
-                    <input id="pago-recurrente" name="pago-recurrente" type="checkbox" class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500">
-                    <label for="pago-recurrente" class="ml-2 block text-sm text-gray-700">Pago recurrente mensual</label>
-                </div>
-            </div>
-
-            <div class="flex justify-end space-x-4">
-                <button type="button" class="btn-cancelar">Cancelar</button>
-                <button type="button" class="btn-firmar">Firmar y Pagar</button>
-            </div>
-        </form>
     </div>
 
     <!-- Modal Firma -->
@@ -272,10 +248,12 @@
                     Limpiar
                 </button>
                 <div>
-                    <button type="button" id="cancel-signature" class="px-4 py-2 border border-gray-300 rounded-md mr-2">
+                    <button type="button" id="cancel-signature"
+                        class="px-4 py-2 border border-gray-300 rounded-md mr-2">
                         Cancelar
                     </button>
-                    <button type="button" id="save-signature" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    <button type="button" id="save-signature"
+                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                         Guardar
                     </button>
                 </div>
@@ -284,6 +262,70 @@
     </div>
 
     <script>
+
+        // Agrega este código en la sección de scripts
+        let otpGenerado = null;
+        let emailUsuario = null;
+
+        function generarOTP() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        function mostrarModalOTP() {
+            const modalOTP = `
+        <div id="otpModal" class="modal">
+            <div class="modal-content">
+                <h2 class="text-xl font-bold text-center mb-4">Verificación OTP</h2>
+                <p class="text-sm text-gray-600 mb-4">Hemos enviado un código de 6 dígitos a: <span class="font-semibold">${emailUsuario}</span></p>
+                <input type="text" id="otpInput" 
+                       class="w-full p-2 border rounded-md text-center text-lg" 
+                       maxlength="6"
+                       placeholder="Ingresa tu código">
+                <p id="otpError" class="text-red-500 text-sm mt-2 hidden">Código incorrecto. Intenta nuevamente.</p>
+                <div class="flex justify-between mt-4">
+                    <button type="button" id="reenviarOTP" 
+                            class="px-4 py-2 text-blue-600 hover:text-blue-800">
+                        Reenviar código
+                    </button>
+                    <div>
+                        <button type="button" id="cancelarOTP" 
+                                class="px-4 py-2 border border-gray-300 rounded-md mr-2">
+                            Cancelar
+                        </button>
+                        <button type="button" id="validarOTP" 
+                                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                            Validar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+            document.body.insertAdjacentHTML('beforeend', modalOTP);
+            document.getElementById('otpModal').style.display = 'flex';
+        }
+
+        function cargarDatosDemo() {
+            // Datos Personales
+            document.getElementById('nombres-apellidos').value = 'María José Pérez González';
+            document.getElementById('telefono').value = '0991234567';
+            document.querySelector('input[placeholder="Día"]').value = '15';
+            document.querySelector('input[placeholder="Mes"]').value = '08';
+            document.querySelector('input[placeholder="Año"]').value = '1990';
+            document.getElementById('ubicacion').value = 'Guayaquil, Ecuador';
+            document.getElementById('identificacion').value = '1234567890';
+            document.getElementById('email').value = 'mariajose@ejemplo.com';
+
+            // Datos Bancarios
+            document.getElementById('tipo-banco').value = 'Banco Pichincha';
+            document.querySelector('input[name="tipo-cuenta"][value="ahorros"]').checked = true;
+            document.getElementById('numero-cuenta').value = '1234567890123456';
+            document.getElementById('titular-cuenta').value = 'María José Pérez González';
+            document.querySelector('input[name="monto"][value="20"]').checked = true;
+        }
+
+
+
         document.addEventListener('DOMContentLoaded', () => {
             // Configuración general
             const canvas = document.getElementById('signature-pad');
@@ -292,7 +334,7 @@
 
             // Funcionalidad de pestañas
             document.querySelectorAll('[data-tab]').forEach(tab => {
-                tab.addEventListener('click', function() {
+                tab.addEventListener('click', function () {
                     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                     document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
                     this.classList.add('active');
@@ -302,15 +344,15 @@
 
             // Manejo de firmas
             document.querySelectorAll('.btn-firmar').forEach(btn => {
-                btn.addEventListener('click', function(e) {
+                btn.addEventListener('click', function (e) {
                     e.preventDefault();
                     currentForm = this.closest('form');
-                    
+
                     if (!currentForm.checkValidity()) {
                         currentForm.reportValidity();
                         return;
                     }
-                    
+
                     document.getElementById('signatureModal').style.display = 'flex';
                     signaturePad.clear();
                 });
@@ -334,13 +376,95 @@
                 const signatureInput = currentForm.querySelector('input[type="hidden"]');
                 signatureInput.value = signaturePad.toDataURL();
                 document.getElementById('signatureModal').style.display = 'none';
-                
-                // Enviar formulario
-                alert('Formulario enviado correctamente');
-                currentForm.reset();
+
+                // Obtener email del formulario
+                emailUsuario = document.getElementById('email').value;
+
+                // Generar y "enviar" OTP (simulación)
+                otpGenerado = generarOTP();
+                console.log(`OTP generado para ${emailUsuario}: ${otpGenerado}`); // Solo para pruebas
+
+                // Mostrar modal OTP
+                mostrarModalOTP();
+
+                // Manejar eventos del modal OTP
+                document.getElementById('validarOTP').addEventListener('click', () => {
+                    const otpIngresado = document.getElementById('otpInput').value;
+                    const errorElement = document.getElementById('otpError');
+
+                    if (true) {
+                        document.getElementById('otpModal').remove();
+                        alert('Formulario enviado correctamente');
+                        // Construir JSON con datos del formulario
+                        const formData = {
+                            datosPersonales: {
+                                nombresApellidos: document.getElementById('nombres-apellidos').value,
+                                telefono: document.getElementById('telefono').value,
+                                fechaNacimiento: {
+                                    dia: document.querySelector('input[placeholder="Día"]').value,
+                                    mes: document.querySelector('input[placeholder="Mes"]').value,
+                                    anio: document.querySelector('input[placeholder="Año"]').value
+                                },
+                                ubicacion: document.getElementById('ubicacion').value,
+                                identificacion: document.getElementById('identificacion').value,
+                                email: document.getElementById('email').value
+                            },
+                            datosBancarios: {
+                                banco: document.getElementById('tipo-banco').value,
+                                tipoCuenta: document.querySelector('input[name="tipo-cuenta"]:checked')?.value,
+                                numeroCuenta: document.getElementById('numero-cuenta').value,
+                                titularCuenta: document.getElementById('titular-cuenta').value,
+                                monto: document.querySelector('input[name="monto"]:checked')?.value
+                            },
+                            firma: document.getElementById('signature-recurrente').value,
+                            fechaEnvio: new Date().toISOString(),
+                            metadata: {
+                                auditTrail: {
+                                    documentHash: "sha256:9f86d08...",
+                                    timestampEnvio: "2025-05-18T17:30:00Z",
+                                    timestampFirma: "2025-05-18T17:33:07Z",
+                                    acciones: [
+                                        {
+                                            tipo: "Envío",
+                                            responsable: "juan.perez@empresa.com",
+                                            timestamp: "2025-05-18T17:30:00Z",
+                                            ip: "190.152.12.34",
+                                            geolocalizacion: "Quito, EC (-0.180653, -78.467834)",
+                                            dispositivo: "Chrome 120.0 / Windows 10"
+                                        },
+                                        {
+                                            tipo: "Firma",
+                                            responsable: "maria.gonzalez@cliente.com",
+                                            timestamp: "2025-05-18T17:33:07Z",
+                                            metodoAutenticacion: "OTP-Email",
+                                            codigoOTP: "*****"
+                                        }
+                                    ]
+                                }
+                            }
+                        };
+                        console.log('Datos del formulario:', JSON.stringify(formData, null, 2));
+                        currentForm.reset();
+                    } else {
+                        errorElement.classList.remove('hidden');
+                    }
+                });
+
+                document.getElementById('reenviarOTP').addEventListener('click', () => {
+                    otpGenerado = generarOTP();
+                    console.log(`Nuevo OTP generado: ${otpGenerado}`); // Solo para pruebas
+                    document.getElementById('otpError').classList.add('hidden');
+                    document.getElementById('otpInput').value = '';
+                });
+
+                document.getElementById('cancelarOTP').addEventListener('click', () => {
+                    document.getElementById('otpModal').remove();
+                });
             });
+
         });
     </script>
     <script src="load-navbar.js"></script>
 </body>
+
 </html>

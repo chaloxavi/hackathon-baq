@@ -1,0 +1,13 @@
+.nav-link {
+    @apply text-gray-600 hover:text-blue-500 transition-colors duration-200;
+}
+#navbar-container {
+    position: fixed; /* Fija la posición */
+    top: 0; /* Lo pega a la parte superior */
+    width: 100%; /* Ancho completo */
+    background: white; /* Fondo sólido */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para efecto elevado */
+    z-index: 1000; /* Asegura que esté por encima de todo */
+}
+/* Estilos para los dropdowns en mobile */
+[x-cloak] { display: none !important; }

@@ -1,6 +1,0 @@
-.nav-link {
-    @apply text-gray-600 hover:text-blue-500 transition-colors duration-200;
-}
-
-/* Estilos para los dropdowns en mobile */
-[x-cloak] { display: none !important; }

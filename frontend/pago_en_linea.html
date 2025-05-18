@@ -1,27 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="styles.css" rel="stylesheet">
   <title>Donación</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
-<body  class="bg-[url('https://www.baq.ec/wp-content/uploads/2025/05/TU-DONACION-SALVA-VIDAS-wb.webp')] bg-cover bg-center text-gray-800">
+
+<body
+  class="bg-[url('https://www.baq.ec/wp-content/uploads/2025/05/TU-DONACION-SALVA-VIDAS-wb.webp')] bg-cover bg-center text-gray-800">
   <div id="navbar-container"></div>
-  
+  <br>
+  <br>
+
   <div class="max-w-6xl mx-auto p-6 mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
     <!-- Sección de donación -->
     <div class="bg-white shadow-md rounded-lg p-6">
-    
+
 
       <h3 class="font-semibold mb-2 text-gray-800">Indica el donativo</h3>
       <div class="grid grid-cols-3 gap-2 mb-4">
-        <button class="border border-[#E1783C] text-[#E1783C] rounded-lg py-2 text-center hover:bg-[#E1783C] hover:text-white">25 $</button>
-        <button class="border border-[#E1783C] bg-[#2D3576] text-white rounded-lg py-2 text-center font-bold">50 $<br><span class="text-green-400 text-xs">💚 SUGERIDO</span></button>
-        <button class="border border-[#E1783C] text-[#E1783C] rounded-lg py-2 text-center hover:bg-[#E1783C] hover:text-white">100 $</button>
-        <button class="border border-[#E1783C] text-[#E1783C] rounded-lg py-2 text-center hover:bg-[#E1783C] hover:text-white">150 $</button>
-        <button class="border border-[#E1783C] text-[#E1783C] rounded-lg py-2 text-center hover:bg-[#E1783C] hover:text-white">200 $</button>
-        <button class="border border-[#E1783C] text-[#E1783C] rounded-lg py-2 text-center hover:bg-[#E1783C] hover:text-white">500 $</button>
+        <button
+          class="border border-[#E1783C] text-[#E1783C] rounded-lg py-2 text-center hover:bg-[#E1783C] hover:text-white">25
+          $</button>
+        <button class="border border-[#E1783C] bg-[#2D3576] text-white rounded-lg py-2 text-center font-bold">50
+          $<br><span class="text-green-400 text-xs">💚 SUGERIDO</span></button>
+        <button
+          class="border border-[#E1783C] text-[#E1783C] rounded-lg py-2 text-center hover:bg-[#E1783C] hover:text-white">100
+          $</button>
+        <button
+          class="border border-[#E1783C] text-[#E1783C] rounded-lg py-2 text-center hover:bg-[#E1783C] hover:text-white">150
+          $</button>
+        <button
+          class="border border-[#E1783C] text-[#E1783C] rounded-lg py-2 text-center hover:bg-[#E1783C] hover:text-white">200
+          $</button>
+        <button
+          class="border border-[#E1783C] text-[#E1783C] rounded-lg py-2 text-center hover:bg-[#E1783C] hover:text-white">500
+          $</button>
       </div>
 
       <div class="mb-4">
@@ -47,11 +65,14 @@
 
       <form id="donation-form" class="space-y-4">
         <div class="flex gap-4">
-          <input id="email" type="email" placeholder="Dirección de email" class="w-full border rounded-md px-4 py-2 text-black" />
+          <input id="email" type="email" placeholder="Dirección de email"
+            class="w-full border rounded-md px-4 py-2 text-black" />
         </div>
         <div class="flex gap-4">
-          <input id="firstName" type="text" placeholder="Nombre" class="w-full border rounded-md px-4 py-2 text-black" />
-          <input id="lastName" type="text" placeholder="Apellidos" class="w-full border rounded-md px-4 py-2 text-black" />
+          <input id="firstName" type="text" placeholder="Nombre"
+            class="w-full border rounded-md px-4 py-2 text-black" />
+          <input id="lastName" type="text" placeholder="Apellidos"
+            class="w-full border rounded-md px-4 py-2 text-black" />
         </div>
         <label class="flex items-center">
           <input type="checkbox" class="mr-2 accent-green-600" />
@@ -65,7 +86,8 @@
           <input type="text" placeholder="CVV" class="w-full border rounded-md px-4 py-2 text-black" />
         </div>
         <div class="flex gap-4">
-          <input type="text" placeholder="Nombre que figura en la tarjeta" class="w-full border rounded-md px-4 py-2 text-black" />
+          <input type="text" placeholder="Nombre que figura en la tarjeta"
+            class="w-full border rounded-md px-4 py-2 text-black" />
         </div>
         <div class="flex gap-4">
           <select class="w-full border rounded-md px-4 py-2 text-black">
@@ -73,29 +95,37 @@
             <option value="Colombia">Colombia</option>
             <option value="México">México</option>
           </select>
-          <input type="text" placeholder="Código postal" class="w-full border rounded-md px-4 py-2 border-red-500 text-black" />
+          <input type="text" placeholder="Código postal"
+            class="w-full border rounded-md px-4 py-2 border-red-500 text-black" />
         </div>
         <label class="flex items-center">
           <input type="checkbox" class="mr-2 accent-green-600" />
           Guardar tarjeta para futuros donativos
         </label>
-        
-        <button type="submit" class="w-full bg-[#2D3576] hover:bg-[#1c224d] text-white font-semibold py-2 rounded-md mt-4">Donar ahora</button>
+
+        <button type="submit"
+          class="w-full bg-[#2D3576] hover:bg-[#1c224d] text-white font-semibold py-2 rounded-md mt-4">Donar
+          ahora</button>
       </form>
     </div>
 
     <!-- Sección de donaciones recientes -->
     <div class="bg-white shadow-md rounded-lg p-6">
       <div class="flex items-center mb-6">
-        <img src="https://firebasestorage.googleapis.com/v0/b/test-banco-alimentos.firebasestorage.app/o/images%2Fbanco_alimentos.jpeg?alt=media&token=ae08d5bf-70ed-40cd-8909-25cec82415b6" alt="Proyecto" class="rounded-lg w-24 h-24 object-cover mr-4" />
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/test-banco-alimentos.firebasestorage.app/o/images%2Fbanco_alimentos.jpeg?alt=media&token=ae08d5bf-70ed-40cd-8909-25cec82415b6"
+          alt="Proyecto" class="rounded-lg w-24 h-24 object-cover mr-4" />
         <div>
           <p class="text-sm text-gray-600">Gracias por ayudar a cambiar vidas</p>
           <h2 class="text-lg font-semibold text-gray-800">Con tu donación, miles de personas pueden comer hoy</h2>
-          <p class="text-sm text-gray-700">Cada aporte brinda esperanza y alimento a familias que lo necesitan. ¡Tu ayuda hace la diferencia!</p>
+          <p class="text-sm text-gray-700">Cada aporte brinda esperanza y alimento a familias que lo necesitan. ¡Tu
+            ayuda hace la diferencia!</p>
         </div>
       </div>
       <div class="flex flex-col gap-4">
-        <button class="bg-[#E1783C] text-white font-semibold py-2 px-4 rounded-full">Compartir</button>
+
+        <button onclick="openShareModal()"
+          class="bg-[#E1783C] text-white font-semibold py-2 px-4 rounded-fullhover:bg-[#c7632e]">Compartir</button>
       </div>
       <h3 class="font-semibold mt-6 mb-2 text-gray-800">Donaciones recientes</h3>
 
@@ -122,7 +152,10 @@
           <li class="flex items-center">
             <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-4">🤲</div>
             <div>
-              <p class="font-medium">Anónimo <span class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded ml-2">MENSUALMENTE</span> <span class="text-sm text-gray-600">· 20 $ · 7 d</span></p>
+              <p class="font-medium">Anónimo <span
+                  class="bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded ml-2">MENSUALMENTE</span>
+                <span class="text-sm text-gray-600">· 20 $ · 7 d</span>
+              </p>
             </div>
           </li>
           <li class="flex items-center">
@@ -135,6 +168,68 @@
       </div>
     </div>
   </div>
+  <!-- Modal Compartir -->
+  <div id="shareModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold">Compartir donación</h3>
+        <button onclick="closeShareModal()" class="text-gray-500 hover:text-gray-700">
+          ✕
+        </button>
+      </div>
+
+      <div class="mb-4">
+        <div class="flex gap-2">
+          <input type="text" id="shareLink" value="https://www.baq.ec/donar"
+            class="w-full border rounded-md px-3 py-2 text-sm" readonly>
+          <button onclick="copyLink()" class="bg-[#2D3576] text-white px-4 py-2 rounded-md hover:bg-[#1c224d] text-sm">
+            Copiar
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg p-6 mt-6">
+        <h3 class="text-xl font-semibold mb-4">Consigue más donantes compartiendo</h3>
+
+        <div class="grid grid-cols-2 gap-4">
+          <button class="flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 transition-colors"
+            onclick="shareOnFacebook()">
+            <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" class="w-6 h-6">
+            <span>Facebook</span>
+
+          </button>
+
+          <!-- WhatsApp -->
+          <button class="flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 transition-colors"
+            onclick="shareOnWhatsApp()">
+            <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp" class="w-6 h-6">
+            <span>WhatsApp</span>
+
+          </button>
+
+
+          <!-- LinkedIn -->
+          <button class="flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 transition-colors"
+            onclick="shareOnLinkedIn()">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="w-6 h-6">
+            <span>LinkedIn</span>
+
+          </button>
+
+          <!-- X (Twitter) -->
+          <button class="flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 transition-colors"
+            onclick="shareOnTwitter()">
+            <img src="https://cdn-icons-png.flaticon.com/512/124/124021.png" alt="Twitter" class="w-6 h-6">
+            <span>X</span>
+
+          </button>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <script>
     const form = document.getElementById('donation-form');
@@ -144,7 +239,75 @@
       alert("¡Gracias por tu donación!");
       form.reset();
     });
+
+    // Función para abrir el modal
+    function openShareModal() {
+      document.getElementById('shareModal').classList.remove('hidden');
+      setupSocialLinks();
+    }
+
+    // Función para cerrar el modal
+    function closeShareModal() {
+      document.getElementById('shareModal').classList.add('hidden');
+    }
+
+    // Función para copiar el enlace
+    function copyLink() {
+      const input = document.getElementById('shareLink');
+      input.select();
+      document.execCommand('copy');
+      alert('¡Enlace copiado al portapapeles!');
+    }
+
+    // Configurar enlaces sociales
+    const donationUrl = 'https://www.baq.ec/donar-baq/';
+    const message = encodeURIComponent('¡Ayuda a esta noble causa!');
+
+    function shareOnFacebook() {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${donationUrl}`, '_blank');
+    }
+
+    function shareOnWhatsApp() {
+      window.open(`https://api.whatsapp.com/send?text=${message}%20${donationUrl}`, '_blank');
+    }
+
+    function shareOnMessenger() {
+      window.open(`fb-messenger://share/?link=${donationUrl}`, '_blank');
+    }
+
+    function shareByEmail() {
+      window.location.href = `mailto:?subject=Apoya esta causa&body=${message}%0A%0A${donationUrl}`;
+    }
+
+    function shareOnLinkedIn() {
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${donationUrl}`, '_blank');
+    }
+
+    function shareOnTwitter() {
+      window.open(`https://twitter.com/intent/tweet?text=${message}&url=${donationUrl}`, '_blank');
+    }
+
+    function shareOnNextdoor() {
+      window.open(`https://nextdoor.com/sharekit/?text=${message}&url=${donationUrl}`, '_blank');
+    }
+
+    function generateQR() {
+      const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${donationUrl}`;
+      window.open(qrUrl, '_blank');
+    }
+
+    function copyWidgetCode() {
+      const widgetCode = `<iframe src="${donationUrl}/widget" width="300" height="400"></iframe>`;
+      navigator.clipboard.writeText(widgetCode);
+      alert('Código del widget copiado al portapapeles');
+    }
+
+    // Cerrar modal al hacer clic fuera
+    document.getElementById('shareModal').addEventListener('click', function (e) {
+      if (e.target === this) closeShareModal();
+    });
   </script>
   <script src="load-navbar.js"></script>
 </body>
+
 </html>
