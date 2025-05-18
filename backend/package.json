@@ -1,24 +1,19 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "description": "Backend para OTP y formularios con Firebase",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "chaloxavi",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "axios": "^1.9.0",
     "cors": "^2.8.5",
-    "docusign-esign": "^8.1.0",
+    "crypto": "^1.0.1",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "firebase": "^11.7.3",
-    "nodemailer": "^7.0.3",
-    "pdfkit": "^0.17.1"
+    "nodemailer": "^7.0.3"
   }
 }
