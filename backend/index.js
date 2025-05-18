@@ -37,6 +37,11 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Rutas
+app.get('/', (req, res) => {
+  res.send('API Express funcionando 🚀');
+});
+
 app.post('/otp/send', async (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ error: 'Email requerido' });
